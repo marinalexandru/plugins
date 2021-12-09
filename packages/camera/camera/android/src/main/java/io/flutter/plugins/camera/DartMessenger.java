@@ -64,6 +64,11 @@ class DartMessenger {
     if (channel == null) {
       return;
     }
-    channel.invokeMethod(eventType.toString().toLowerCase(), args);
+    new Handler(Looper.getMainLooper()).post(new Runnable () {
+      @Override
+      public void run () {
+        channel.invokeMethod(eventType.toString().toLowerCase(), args);
+      }
+    });
   }
 }
